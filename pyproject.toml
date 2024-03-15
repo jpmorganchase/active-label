@@ -1,0 +1,128 @@
+# Copyright 2023 J.P. Morgan Chase & Co.
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+# the License. You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+# specific language governing permissions and limitations under the License.
+
+
+# Project configuration file
+
+[project]
+
+name = "active-label"
+dynamic = ["version"]
+
+authors = [
+    { name = "J.P. Morgan Chase & Co.", email = "open_source@jpmorgan.com" }
+]
+description = "Fast ad-hoc data annotation tool for Python notebooks."
+readme = "README.md"
+license = { file = "LICENSE" }
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Typing :: Typed",
+]
+keywords = [
+    "data annotation",
+    "machine learning",
+    "active learning",
+]
+
+# Minimum supported Python version
+requires-python = ">=3.9"
+# All runtime dependencies that must be packaged, pin major version only.
+dependencies = [
+    "ipyevents>=2.0",
+    "ipywidgets>=8.0",
+    "jsonpickle>=2.1",
+    "modAL-python>=0.4",
+    "more-itertools>=8.14",
+    "networkx>=2.8",
+    "pandas>=1.5",
+]
+
+
+[project.urls]
+
+"Homepage" = "https://github.com/jpmorganchase/active-label"
+"Bug Tracker" = "https://github.com/jpmorganchase/active-label/issues"
+"Documentation" = "https://active-label.readthedocs.io"
+"Download" = "https://pypi.python.org/pypi/active-label"
+"Source Code" = "https://github.com/jpmorganchase/active-label"
+
+
+[project.optional-dependencies]
+
+docs = [
+    "sphinx",
+    "sphinx-rtd-theme",
+]
+testing = [
+    "pytest",
+    "pytest-cov",
+    "pytest-mock",
+]
+linting = [
+    "black",
+    "flake8",
+    "interrogate",
+    "isort",
+    "mypy",
+    "pre-commit",
+]
+
+
+[build-system]
+
+requires = [
+    "setuptools>=45",
+    "wheel",
+    "setuptools_scm[toml]>=6.2",
+]
+build-backend = "setuptools.build_meta"
+
+
+[tool.setuptools_scm]
+# Section required to populate package version from Git tag
+
+[tool.pytest.ini_options]
+log_level = "DEBUG"
+log_cli = true
+
+[tool.interrogate]
+
+fail-under = 100
+verbose = 2
+color = true
+omit-covered-files = true
+
+
+[tool.coverage.report]
+
+fail_under = 90
+
+
+[tool.black]
+
+line-length = 120
+
+
+[tool.isort]
+
+profile = "black"
+
+
+[[tool.mypy.overrides]]
+
+module = [
+    "pluggy.*",  # Type hints not exported yet, see https://github.com/pytest-dev/pluggy/issues/416
+]
+ignore_missing_imports = true
